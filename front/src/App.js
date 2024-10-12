@@ -1,10 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router} from 'react-router-dom'
+import RoutesSwitch from './routes'
 
 function App() {
   return (
-    <div className="App">
-      <p>NavCar</p>
-    </div>
+    <Router>
+      <RoutesSwitch />
+    </Router>
   );
 }
 
