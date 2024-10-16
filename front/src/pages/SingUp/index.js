@@ -19,7 +19,7 @@ function SingUp() {
                     <form className='register'>
                         <h1>Cadastro</h1>
                         <select className='select' onChange={changeSelection}>
-                            <option>Empresa ou Pessoa Física</option>
+                            <option value="CPF">Empresa ou Pessoa Física</option>
                             <option value="CPF">Pessoa Física</option>
                             <option value="CNPJ">Pessoa Jurídica</option>
                         </select>
