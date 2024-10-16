@@ -17,7 +17,7 @@ export default function RouteWrapper({
   }
 
   if (signed && !isPrivate) {
-    return <Navigate to="/" />;
+    return <Navigate to="/register" />;
   }
 
   return <Component {...rest} />;
