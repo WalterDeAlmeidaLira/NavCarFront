@@ -3,5 +3,9 @@
   padding: 0px;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
-  height: 100%;
+  
+}
+
+html, body,#root {
+  height: 100%; /* Garante que o body ocupe 100% da altura */
 }

@@ -1,0 +1,185 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&family=Norican&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* css do cabeçalho da página home */
+.cabecalho_home{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 500px;
+    background-image: url('../../assets/image.png');
+    background-size: cover;
+}
+
+.navegacao{
+    width: 100%;
+}
+
+.menu_navegacao{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 10px;
+}
+
+.menu_navegacao_itens{
+    margin-right: 10px;
+    padding: 5px;
+    font-family: "Lexend Zetta", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgb(126, 126, 126);
+    cursor: pointer;
+}
+
+.menu_navegacao_itens:hover{
+    color: black;
+}
+
+.container_titulo{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo{
+    font-size: 100px;
+    font-family: "Lexend Zetta", sans-serif;
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase;
+}
+
+.titulo_mensagem{
+    font-family: "Norican", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    color: white;
+}
+
+/* fim do css do cabeçalho da página home */
+
+.conteiner_conteudo{
+    display: flex;
+    width: 100%;
+    min-height: 300px;
+    background-color: black;
+    
+}
+
+.container_mensagem{
+    display: flex;
+    margin: 50px;
+}
+
+.titulo_container{
+    font-family: "Lexend Zetta", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    color: white;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    letter-spacing: 10px;
+}
+
+.paragrafo_container{
+    font-family: "Lexend Zetta", sans-serif;
+    font-weight: 200;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.imagem_conteudo{
+    width: 600px;
+    margin-left: 25px;
+}
+
+/* css da busca de local */
+
+.conteiner_busca{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 450px;
+    background-image: url("../../assets/image\ 3.png");
+    background-size: cover;
+    justify-content: center;
+}
+
+.container_inputs{
+    display: flex;
+    margin: 25px;
+    justify-content: center;
+}
+
+.conteudo_input{
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
+    
+}
+
+.label{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.836);
+    padding: 10px 10px 0px 10px;
+    font-family: "Lexend Zetta", sans-serif;
+    margin-bottom: 5px;
+}
+
+.svg{
+    width: 15px;
+    color: black;
+    margin-right: 15px;
+}
+
+.div_input{
+    background-color: white;
+    display: flex;
+    min-width:350px;
+    min-height: 40px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+.input{
+    max-height: 40px;
+    width: 100%;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    
+}
+
+.conteudo_dois{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.titulo_dois{
+    color: white;
+    font-family: "Lexend Zetta", sans-serif;
+    margin-bottom: 30px;
+    font-size: 35px;
+
+}
+
+.imagem_conteudo_dois{
+    max-width: 550px;
+}
