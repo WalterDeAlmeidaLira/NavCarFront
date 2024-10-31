@@ -1,0 +1,164 @@
+.banner_rent{
+    width: 100%;
+    background-image: url('../../assets//image5.png');
+    min-height: 350px;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.frase_efeito{
+    margin-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.frase_efeito > p{
+    color: rgb(255, 255, 255);
+    font-size: 45px;
+    text-transform: capitalize;
+    font-family: "Lexend Zetta", sans-serif;
+}
+
+.svg{
+    width: 15px;
+    margin: 0;  
+    margin-right:15px ;
+
+}
+
+.form_rent{
+    width: 100%;
+    background-color: #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container_inputs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.conteudo_input{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 15px;
+    width: 150px;
+    border-radius: 5px ;
+}
+
+.conteudo_input_text{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 15px;
+    width: 550px;
+    border-radius: 5px
+}
+
+.div_input{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.div_input > input{
+    border-radius: 5px;
+    border: none;
+    padding: 15px;
+    width: 100%;
+}
+
+.planos_rent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.planos_rent > p{
+    max-width: 120px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-transform: capitalize;
+    color: aliceblue;
+}
+
+.moeda{
+    width: 35px;
+}
+
+
+/* sjfcnbajç */
+
+.principal_rent{
+    min-height: 100vh;
+    background-color: #444;
+    
+}
+
+.container_veiculos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.veiculos_rent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.titulo_rent{
+    text-transform: capitalize;
+    font-family: "Lexend Zetta", sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 25px;
+    margin-left: 35px;
+}
+
+.card_veiculo{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: white;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    margin: 0 30px 30px 30px;
+}
+
+.botao_veiculos{
+    background-color: #39F855;
+    padding: 5px 10px;
+    border-radius: 15px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.detalhes_veidulos{
+    font-size: 18px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.detalhes_veidulos:hover{
+    color: rgb(46, 46, 46);
+}
+
+.veiculo_card{
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

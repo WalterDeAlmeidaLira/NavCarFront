@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import SingIn from '../pages/SingIn';
 import SingUp from '../pages/SingUp';
+import Rent from '../pages/Rent'
 import RouteWrapper from './Route'; // Importação correta do wrapper
 
 export default function RoutesSwitch() {
@@ -18,6 +19,10 @@ export default function RoutesSwitch() {
       <Route 
         path="/register" 
         element={<RouteWrapper component={SingUp} isPrivate={false} />} 
+      />
+      <Route 
+        path="/user/rent" 
+        element={<RouteWrapper component={Rent} isPrivate={false} />} 
       />
     </Routes>
   );

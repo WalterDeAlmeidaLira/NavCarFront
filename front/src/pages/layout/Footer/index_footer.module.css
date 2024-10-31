@@ -1,3 +1,44 @@
+footer{
+    width: 100%;
+    background-color: #483D8B;
+}
+
 .footer{
     display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 50px;
+}
+
+.titulo_footer{
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: white;
+}
+
+.coluna_footer > p{
+    color: white;
+    margin-bottom: 5px;
+}
+
+.link_footer{
+    cursor: pointer;
+}
+
+.link_footer:hover{
+    color: #9289d1;
+}
+
+
+.copy{
+    margin-top: 20px;
+}
+
+.redes_sociasi_footer{
+    display: flex;
+}
+
+.svg_footer{
+    cursor: pointer;
+    margin-right: 10px;
 }
