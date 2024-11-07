@@ -66,6 +66,35 @@
     border-radius: 10px;
     font-size: 18px;
     color: #20761E;
+    cursor: pointer;
 }
 
+.button:hover{
+    background-color: #20761E;
+    color: white;
+}
+
+.aviso{
+    background-color: black;
+    position: absolute;
+    text-align: center;
+    z-index: 5;
+    padding: 25px;
+    border-radius: 5px;
+    min-width: 250px;
+    font-size: 18px;
+    color: beige;
+    
+}
+
+.aviso > button{
+    padding: 3px 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.aviso > button:hover{
+    background-color: #999;
+}
 

@@ -1,12 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router} from 'react-router-dom'
 import RoutesSwitch from './routes'
+import AuthProvider from "./context/auth";
 
 function App() {
   return (
-    <Router>
-      <RoutesSwitch />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <RoutesSwitch />
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -3,7 +3,7 @@ import Home from '../pages/Home';
 import SingIn from '../pages/SingIn';
 import SingUp from '../pages/SingUp';
 import Rent from '../pages/Rent'
-import RouteWrapper from './Route'; // Importação correta do wrapper
+import RouteWrapper from './Route'; 
 
 export default function RoutesSwitch() {
   return (
@@ -22,7 +22,7 @@ export default function RoutesSwitch() {
       />
       <Route 
         path="/user/rent" 
-        element={<RouteWrapper component={Rent} isPrivate={false} />} 
+        element={<RouteWrapper component={Rent} isPrivate={true} />} 
       />
     </Routes>
   );
