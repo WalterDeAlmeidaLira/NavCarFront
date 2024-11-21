@@ -9,6 +9,7 @@ const cors = require('cors')
 app.use(express.json())
 app.use(bodyParse.urlencoded({ extended: false })) // apenas dados simples
 app.use(bodyParse.json()) // apenas dados em json
+app.use('/uploads',express.static('uploads'))
 app.use(cors({
     origin: 'http://localhost:3000',  // Permite que o frontend do localhost:3000 faça requisições
     credentials: true,               // Permite o envio de cookies se necessário

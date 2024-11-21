@@ -19,8 +19,7 @@ async function createdUser(user) {
 
     if(!busca[0].length == 0){
         return 0
-    }
-    
+    }    
 
     const comando = ` 
         INSERT INTO user (user_name, user_email, user_password, user_birthday, user_doc, user_enterprise, user_profile, user_admin)
@@ -52,6 +51,62 @@ async function createdUser(user) {
     return user
 }
 
+async function atualizarUsuario(user,id){
+    const { 
+        user_name,
+        user_email,
+        user_password,
+        user_birthday,
+        user_doc,
+        user_enterprise,
+        user_profile,
+        user_admin,
+    } = user;
+    try{
+        const connection = await db;
+        const cmd = `UPDATE user 
+            SET user_name = ?,
+            user_email = ?,
+            user_password = ?,
+            user_birthday = ?,
+            user_doc = ?,
+            user_enterprise = ?,
+            user_profile = ?,
+            user_admin = ?
+            WHERE user_id = ?
+            `    
+        const update = await connection.query(cmd, [
+            user_name,
+            user_email,
+            user_password,
+            user_birthday,
+            user_doc,
+            user_enterprise,
+            user_profile,
+            user_admin,
+            id
+        ])
+
+        return update[0]
+
+    }catch(e){
+        return e
+    }
+
+
+}
+
+async function deletarUsuario(id){
+    try{
+        const connection = await db
+        const comando = `DELETE FROM user WHERE user_id = ?`
+        const result = await connection.query(comando,[id])        
+        return result[0]
+    }catch(e){
+        return e
+    }
+}
+
 async function buscaUsuario(email) {
     try{
         const connection = await db
@@ -64,4 +119,16 @@ async function buscaUsuario(email) {
     }
 }
 
-module.exports = { createdUser,buscaUsuario }
+async function buscaUsuarioId(id) {
+    try{
+        const connection = await db
+        const comando = `SELECT * FROM user WHERE user_id = ?`
+        const result = await connection.query(comando,[id])
+        return result[0][0]
+    }catch(e){
+        console.log("esstou aqui no erro")
+        return e
+    }
+}
+
+module.exports = { createdUser,buscaUsuario, buscaUsuarioId, atualizarUsuario, deletarUsuario }

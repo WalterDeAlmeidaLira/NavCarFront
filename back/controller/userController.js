@@ -1,20 +1,45 @@
 const express = require('express')
-const { createdUser, buscaUsuario } = require('../repository/userRepository')
+const { createdUser, buscaUsuario,buscaUsuarioId,atualizarUsuario,deletarUsuario } = require('../repository/userRepository')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const validarCPF = require('../helpers/validadorCPF')
 const validarCNPJ = require('../helpers/validadorCNPJ')
 
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // Pasta de destino
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Nome do arquivo
+    }
+});
+
+const upload = multer({ storage: storage });
+
 //PEGA USUARIO
-router.get("/:idUser", (req, resp) => {
+router.get("/:idUser", async (req, resp) => {
     const id = req.params.idUser
-    resp.status(200).json({ msg: `usuario ${id}` })
+    let user
+
+    try{
+        user = await buscaUsuarioId(id)
+        
+        if(user == 0){
+            resp.status(404).json({msg:'Esse usuario não existe'})
+        }else{
+            delete user.user_password
+        }
+    }catch(e){
+        
+        return resp.status(404).json({ msg:'erro ao buscar usuário!'})
+    }
+
+    return resp.status(200).json({ user })
 })
 
-router.post('/register', async (req, resp) => {
-    
-    resp.header()
+router.post('/register', upload.single('image'),async (req, resp) => {
 
     let user = {
         user_name: req.body.name,
@@ -24,9 +49,11 @@ router.post('/register', async (req, resp) => {
         user_birthday: req.body.birthday,
         user_doc: req.body.doc,
         user_enterprise: req.body.enterprise,
-        user_profile: req.body.image,
+        user_profile: req.file ? req.file.filename : null,
         user_admin: req.body.admin
     }
+
+    console.log(user)
 
     if(!user.user_name || !user.user_email || !user.user_password || !user.user_password_confirm || !user.user_doc){
         return resp.status(401).json({mensagem: "faltou preencher algum campo obrigatório!"})
@@ -57,7 +84,7 @@ router.post('/register', async (req, resp) => {
     let password = user.user_password
     password = bcrypt.hashSync(password)
     user.user_password = password
-
+    
     try{
         user = await createdUser(user)
     }catch(err){
@@ -113,12 +140,69 @@ router.post('/login', async (req,resp)=>{
 
 })
 
-router.put('/update', (req, resp) => {
-    resp.status(200).send("usuário atualizado!")
+router.put('/update/:iduser',upload.single('image'), async (req, resp) => {
+    let id = req.params.iduser
+    let user
+    let userUpdate = {
+        user_name: req.body.name,
+        user_email: req.body.email,
+        user_birthday: req.body.birthday,
+        user_doc: req.body.doc,
+        user_enterprise: req.body.enterprise,
+        user_profile: req.file ? req.file.filename : null,
+    }
+
+    try {
+        user = await buscaUsuarioId(id)
+    } catch (error) {
+        return resp.status(404).json({msg:"Erro na atualização do usuário"})
+    }
+    console.log(req.body.name)
+
+    if(userUpdate.user_name){
+        console.log("estou no name")
+        user.user_name = userUpdate.user_name
+    }
+
+    if(userUpdate.user_email){
+        user.user_email = userUpdate.user_email
+    }
+
+    if(userUpdate.user_birthday){
+        user.user_birthday = userUpdate.user_birthday
+    }
+
+    if(userUpdate.user_doc){
+        user.user_doc = userUpdate.user_doc
+    }
+
+    if(userUpdate.user_enterprise){
+        user.user_enterprise = userUpdate.user_enterprise
+    }
+
+    if(userUpdate.user_profile){
+        user.user_profile = userUpdate.user_profile
+    }
+
+
+    try {
+        const result = await atualizarUsuario(user,id)
+        return resp.status(200).json({msg:"Usuário atualizado com sucesso!"})
+    } catch (error) {
+        return resp.status(404).json({msg:'erro no update'})
+    }
+
 })
 
-router.delete('/delete', (req, resp) => {
-    resp.status(200).send('usuário deletado com sucesso!')
+router.delete('/delete/:userid', async(req, resp) => {
+    const id = req.params.userid
+    try {
+        const result = await deletarUsuario(id)
+        return resp.status(200).json({msg:"Usuário deletado com sucesso!"})
+    } catch (error) {
+        return resp.status(404).json({msg:'erro ao deletar usuario'})
+    }
+
 })
 
 module.exports = router
