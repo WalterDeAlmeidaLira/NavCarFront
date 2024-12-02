@@ -25,14 +25,20 @@ function AuthProvider({children}){
 
     async function authUser(data){
 
+        if(data == ''){
+            localStorage.setItem('login', '')
+            window.location.href = '/register'
+            return    
+        }
+
         localStorage.setItem('login', JSON.stringify(data.token))
         window.location.href = '/user/rent'
     }
 
-    async function login(user,rota){
+    async function login(user,rota,formData){
         
         try {
-            const data = await api.post(rota, user)
+            const data = await api.post(rota,formData)
                 .then((res) => { 
                     console.log("resposta do servidor: " + res.data.mensagem);
                     delete user.password
@@ -61,9 +67,14 @@ function AuthProvider({children}){
             return error
         }
     }
+
+    function logout(){
+        setUser(null);
+        authUser('');
+    }
     
     return(
-        <AuthContext.Provider value={{signed: !!user, user, loading, login }} >
+        <AuthContext.Provider value={{signed: !!user, user, loading, login, logout }} >
             {children}
         </AuthContext.Provider>
     )

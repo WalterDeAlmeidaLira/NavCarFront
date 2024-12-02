@@ -42,8 +42,8 @@ function SingIn() {
             <div className={styles.sub_container_login}>
                 <h1 className={styles.title}>Iniciar sessão</h1>
                 <form className={styles.formulario}>
-                    <input type='text' placeholder='Email' onChange={changeEmail} className={styles.input}></input>
-                    <input type='password' placeholder='Senha' onChange={changePassword} className={styles.input}></input>
+                    <input type='text' placeholder='Email' title='Digite seu email' onChange={changeEmail} className={styles.input}></input>
+                    <input type='password' placeholder='Senha' title='Digite sua senha' onChange={changePassword} className={styles.input}></input>
                     <label className={styles.checkbox_title}>
                         <input type='checkbox' className={styles.checkbox}></input>
                         lembrar-me
@@ -52,7 +52,7 @@ function SingIn() {
                     <button type='submit' className={styles.button} onClick={enviar}>Entrar</button>
                 </form>
                 <Link to="/register" className={styles.link}>Não tem cadastro?</Link>
-                <Link to="/register" className={styles.link}>Voltar a página principal</Link>
+                <Link to="/" className={styles.link}>Voltar a página principal</Link>
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const validarCPF = require('../helpers/validadorCPF')
 const validarCNPJ = require('../helpers/validadorCNPJ')
+const dayjs = require('dayjs');
 
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -36,11 +37,11 @@ router.get("/:idUser", async (req, resp) => {
         return resp.status(404).json({ msg:'erro ao buscar usuário!'})
     }
 
-    return resp.status(200).json({ user })
+    return resp.status(200).json({ user:user })
 })
 
 router.post('/register', upload.single('image'),async (req, resp) => {
-
+    
     let user = {
         user_name: req.body.name,
         user_email: req.body.email,
@@ -52,11 +53,62 @@ router.post('/register', upload.single('image'),async (req, resp) => {
         user_profile: req.file ? req.file.filename : null,
         user_admin: req.body.admin
     }
-
-    console.log(user)
-
+    console.log('teste', user)
     if(!user.user_name || !user.user_email || !user.user_password || !user.user_password_confirm || !user.user_doc){
         return resp.status(401).json({mensagem: "faltou preencher algum campo obrigatório!"})
+    }
+
+    if(/[A-Z]/.test(user.user_birthday)) {
+        return resp.status(401).json({ mensagem: "A data de aniversário não deve conter letras" });
+    }
+    
+    if(/[a-z]/.test(user.user_birthday)) {
+        return resp.status(401).json({ mensagem: "A data de aniversário não deve conter letras" });
+    }
+
+    if(user.user_birthday.length < 10) {
+        return resp.status(401).json({ mensagem: "foramto esperado dd/mm/aaaa" });
+    }
+
+    if(user.user_birthday){
+        const today = dayjs() 
+        const birth = dayjs(user.user_birthday,'DD/MM/YYYY'); 
+        const age = today.diff(birth, 'year');
+        console.log("data", user.user_birthday)
+        console.log("idadea",age)
+        console.log("ajsutada",birth)
+        console.log("hj",today)
+        if(age < 18){
+            return resp.status(401).json({mensagem: "Voce deve ter mais de 18 anos para se cadastrar"})
+        }
+    }
+
+    const [day, month, year] = user.user_birthday.split('/')
+    const date = new Date(`${year}-${month}-${day}`)
+    user.user_birthday = date
+
+    if(user.user_password.length < 10) {
+        return resp.status(401).json({ mensagem: "A senha deve ter pelo menos 10 caracteres" });
+    }
+    
+    if(!/[A-Z]/.test(user.user_password)) {
+        return resp.status(401).json({ mensagem: "A senha deve conter pelo menos uma letra maiúscula" });
+    }
+    
+    if(!/[a-z]/.test(user.user_password)) {
+        return resp.status(401).json({ mensagem: "A senha deve conter pelo menos uma letra minúscula" });
+    }
+    
+    if(!/[0-9]/.test(user.user_password)) {
+        return resp.status(401).json({ mensagem: "A senha deve conter pelo menos um número" });
+    }
+    
+    if(!/[!@#$%^&*(),.?":{}|<>]/.test(user.user_password)) {
+        return resp.status(401).json({ mensagem: "A senha deve conter pelo menos um caractere especial (!@#$%^&*(),.?\":{}|<>)" });
+    }
+    
+    if(/\s/.test(user.user_password)) {
+        return resp.status(401).json({ mensagem: "A senha não pode conter espaços em branco" });
     }
 
     if( user.user_password == user.user_password_confirm){
@@ -64,6 +116,8 @@ router.post('/register', upload.single('image'),async (req, resp) => {
     }else{
         return resp.status(401).json({mensagem: "A senha e a confirmação estão diferentes!"})
     }
+
+    
 
     if(user.user_enterprise == 1){
         const validador = validarCNPJ(user.user_doc)
@@ -87,6 +141,7 @@ router.post('/register', upload.single('image'),async (req, resp) => {
     
     try{
         user = await createdUser(user)
+        console.log("id user",user)
     }catch(err){
         return res.status(401).json({erro: err,msg: "erro na criação do usuário!"})
     }
@@ -95,13 +150,13 @@ router.post('/register', upload.single('image'),async (req, resp) => {
         return resp.status(401).json({
             mensagem: "O email já foi cadastrado"
         })
-    } 
-    
+    }    
+
     const token = jwt.sign({
-        id: user.user_id,
+        id: user.id,
         name: user.user_name,
         email: user.user_email
-    },process.env.SECRET,{ expiresIn: '1h'})
+    },'token')
 
     return resp.status(201).json({
         mensagem : " usuário cadastrado com sucesso!",
@@ -134,7 +189,7 @@ router.post('/login', async (req,resp)=>{
         id:user[0].user_id,
         name: user[0].user_name,
         email: user[0].user_email
-    },process.env.SECRET,{ expiresIn: '1h'})
+    },'token')
 
     return resp.status(200).json({token: token})
 
@@ -151,6 +206,8 @@ router.put('/update/:iduser',upload.single('image'), async (req, resp) => {
         user_enterprise: req.body.enterprise,
         user_profile: req.file ? req.file.filename : null,
     }
+
+    console.log('imagem do udsuario ', req.file)
 
     try {
         user = await buscaUsuarioId(id)
@@ -179,8 +236,11 @@ router.put('/update/:iduser',upload.single('image'), async (req, resp) => {
     if(userUpdate.user_enterprise){
         user.user_enterprise = userUpdate.user_enterprise
     }
+    
+    
 
     if(userUpdate.user_profile){
+
         user.user_profile = userUpdate.user_profile
     }
 

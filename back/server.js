@@ -3,17 +3,14 @@ require('dotenv').config()
 const app = express()
 const PORT = 3333
 const userController = require('./controller/userController')
+const carController = require('./controller/carController')
 const bodyParse = require('body-parser')
 const cors = require('cors')
 
 app.use(express.json())
-app.use(bodyParse.urlencoded({ extended: false })) // apenas dados simples
-app.use(bodyParse.json()) // apenas dados em json
+app.use(express.urlencoded({ extended: false })) // apenas dados simples
 app.use('/uploads',express.static('uploads'))
-app.use(cors({
-    origin: 'http://localhost:3000',  // Permite que o frontend do localhost:3000 faça requisições
-    credentials: true,               // Permite o envio de cookies se necessário
-}));
+app.use(cors());
 // app.use((req, res, next) => {
 
 //     //const allowedOrigins = ['https://dominio-confiavel.com', 'https://outro-dominio.com'];
@@ -35,6 +32,7 @@ app.use(cors({
 //     next();
 // });
 
+app.use('/car', carController)
 app.use('/user', userController)
 
 app.use((req, resp, next) => {

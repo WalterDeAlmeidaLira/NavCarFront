@@ -14,9 +14,6 @@ export default function RouteWrapper({
     return <div>Carregando...</div>;
   }
 
-  if (!signed && isPrivate) {
-    return <Navigate to="/login" />;
-  }
   
   if (!signed && isPrivate) {
     return <Navigate to="/register" />;

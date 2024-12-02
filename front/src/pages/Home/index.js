@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import styles from './index_home.module.css'
 import car1 from '../../assets/image 1.png'
 import car2 from '../../assets/image 4.png'
@@ -10,8 +11,8 @@ function Home() {
             <header className={styles.cabecalho_home}>
                 <nav className={styles.navegacao}>
                     <ul className={styles.menu_navegacao}>
-                        <li className={styles.menu_navegacao_itens}>Login</li>
-                        <li className={styles.menu_navegacao_itens}>Cadastro</li>
+                        <Link to="/login"><li className={styles.menu_navegacao_itens}>Login</li></Link>
+                        <Link to="/register"><li className={styles.menu_navegacao_itens}>Cadastro</li></Link>
                     </ul>
                 </nav>
                 <div className={styles.container_titulo}>

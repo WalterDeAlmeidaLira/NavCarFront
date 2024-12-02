@@ -17,7 +17,7 @@ body,html{
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    max-height: 600px;
+    max-height: 620px;
     max-width: 1200px;
     margin: 0 auto;
     background-color: white;
@@ -40,6 +40,7 @@ body,html{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 10px;
     
 }
 
@@ -58,6 +59,37 @@ body,html{
     padding: 8px 5px;
     border: solid 1px #999;
     border-radius: 5px;
+}
+
+.icones{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.senha{
+    border: none !important;
+}
+
+.borda_senha{
+    display: flex;
+    border: 1px solid #777; 
+    padding: 5px;
+    border-radius: 10px; 
+    align-items: center;
+    justify-content: center;
+    max-height: 50px;  
+    margin-bottom: 10px;
+}
+
+.borda_senha > input{
+    max-width: 360px;
+    margin: 0px !important;
+}
+
+.iconesFechado{
+    display: none;
 }
 
 .register input{

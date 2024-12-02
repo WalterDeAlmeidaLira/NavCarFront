@@ -38,17 +38,16 @@ async function createdUser(user) {
             user_admin 
         ]);
         
-        
-        user.id = result.insertId;
-        console.log(result.insertId)
-        console.log(result)
+        console.log("no banoco",user)
+        user.id = result[0].insertId
+        return user
 
     } catch (error) {
         console.error("Erro na criação de usuário:", error);
         throw error
     }
 
-    return user
+    
 }
 
 async function atualizarUsuario(user,id){

@@ -1,0 +1,78 @@
+.button{
+    color: white;
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.button:hover{ 
+    color: green;
+    background-color: aliceblue;
+    cursor: pointer;
+
+}
+
+.img{
+    border-radius: 100px;
+    max-width: 200px;
+}
+
+.input{
+    display: none;
+}
+
+.input_dados{
+    margin: 10px;
+}
+
+.input_dados > label{
+    font-size: 18px;
+    padding: 10px;
+    color: #777;
+    cursor: pointer;
+}
+
+.input_dados > label:hover{
+    color:black
+}
+
+.btnList{
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: darkgreen;
+    color: aliceblue;
+    text-transform: capitalize;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btnList:hover{
+    background-color: rgb(6, 196, 6);
+}
+
+.imgVeiculo{
+    min-width: 150px;
+    margin-right: 5px;
+}
+
+.btnSalvar{
+    padding: 10px;
+    background-color: #777;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+.btnSalvar:hover{
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.link{
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.link:hover{
+    color: darkgreen;
+}

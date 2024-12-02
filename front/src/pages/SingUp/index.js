@@ -4,6 +4,9 @@ import cadastro from '../../assets/cadastro.png'
 import styles from './index_register.module.css'
 import {  useContext } from 'react'
 import { AuthContext} from '../../context/auth'
+import olho from '../../assets/olho.png'
+import olhoFechado from '../../assets/olho_fechado.png'
+
 
 import axios from 'axios'
 
@@ -24,10 +27,11 @@ function SingUp() {
     const [admin,setAdmin] = useState('')
     const [documento, setDocumento] = useState('CPF')
     const [mensagem,setMensagem] = useState('')
+    const [olhoSenha,setOlhoSenha] = useState(false)
 
     function changeSelection(e) {
         const select = e.target.value
-        //setDocumento(select)
+        setDocumento(select)
     }
 
     function changeName(e){
@@ -61,9 +65,18 @@ function SingUp() {
         //console.log(enterprise)
     }
 
-    function changeImage(e){
-        setImage(e.target.value)
-        //console.log(image)
+    function changeImage(e) {
+        const arquivoSelecionado = e.target.files[0];        
+        if (arquivoSelecionado) {
+           
+            const image = new File(
+                [arquivoSelecionado],                
+                arquivoSelecionado.name,             
+                { type: arquivoSelecionado.type }    
+            );
+            setImage(image)
+            console.log('Novo objeto File:', image);
+        }
     }
 
     function changeAdmin(e){
@@ -73,21 +86,48 @@ function SingUp() {
 
     async function submit(e){
         e.preventDefault()
-        
-        const user={
-            name: name,
-            email:email,
-            password:password,
-            passwordConfirm:passwordConfirm,
-            birthday: birthday,
-            doc:doc,
-            enterprise:"0",
-            image:image,
-            admin:"0"
+        let user
+        if(documento == 'CNPJ' ){
+            user={
+                name: name,
+                email:email,
+                password:password,
+                passwordConfirm:passwordConfirm,
+                birthday: birthday,
+                doc:doc,
+                enterprise:"1",
+                image:image,
+                admin:"0"
+            }
+        }else{
+            user={
+                name: name,
+                email:email,
+                password:password,
+                passwordConfirm:passwordConfirm,
+                birthday: birthday,
+                doc:doc,
+                enterprise:"0",
+                image:image,
+                admin:"0"
+            }            
         }
+
+        
+
+        const formData = new FormData()
+        formData.append('name',user.name) 
+        formData.append('email',user.email) 
+        formData.append('password',user.password) 
+        formData.append('passwordConfirm',user.passwordConfirm) 
+        formData.append('birthday',user.birthday) 
+        formData.append('doc',user.doc) 
+        formData.append('enterprise',user.enterprise) 
+        formData.append('image',user.image) 
+        formData.append('admin',user.admin) 
+        
         const rota = '/user/register'
-        const msg = await login(user,rota)
-        console.log(msg)
+        const msg = await login(user,rota,formData)
         setMensagem(msg)
 
     }
@@ -95,13 +135,27 @@ function SingUp() {
     function limparMsg(e){
         setMensagem('')
     }
+
+    function olhoAberto(e){
+        
+        e.target.style.display = "none"    
+        e.target.nextElementSibling.style.display = 'inline-block'
+        e.target.previousElementSibling.type = 'text'
+            
+        
+    }
+
+    function olhoFechadoFuncao(e){
+        e.target.style.display = "none"    
+        e.target.previousElementSibling.style.display = 'inline-block'
+        e.target.previousElementSibling.previousElementSibling.type = 'password'
+        
+    }
     
 
-
-
-
     return (
-        <div className={styles.container}>{mensagem && (            
+        <div className={styles.container}>
+            {mensagem && (            
                 <div className={styles.aviso}><p>{mensagem}</p><button onClick={limparMsg}>OK</button></div>)
             }
             <div className={styles.sub_container}>
@@ -109,20 +163,32 @@ function SingUp() {
                     <form className={styles.register}>
                         <h1>Cadastro</h1>
                         <select className={styles.select} onChange={changeSelection}>
-                            <option value="CPF">Empresa ou Pessoa Física</option>
+                            <option value="CPF">Pessoa Júridica ou Pessoa Física</option>
                             <option value="CPF">Pessoa Física</option>
                             <option value="CNPJ">Pessoa Jurídica</option>
                         </select>
-                        <input type='text' id='name' placeholder='Nome' required onChange={changeName}></input>
-                        <input type='text' id='email' placeholder='Email' required onChange={changeEmail}></input>
-                        <input type='date' id='data' placeholder='Data' required onChange={changeAniversario}></input>
-                        <input type='text' id='password' placeholder='senha' required onChange={changePassword}></input>
-                        <input type='text' id='password' placeholder='confirme a senha' required onChange={changeConfirPassword}></input>
+                        <input type='text' id='name' placeholder='Nome' required onChange={changeName} title='Digite seu nome'></input>
+                        <input type='text' id='email' placeholder='Email' required onChange={changeEmail} title='Digite seu Email'></input>
                         {documento === 'CPF' && (
-                            <input type="text" id="CPF" placeholder="CPF" required  onChange={changeDoc}/>
+                            <input  type="text" placeholder="Digite sua data de nascimento dd/mm/aaaa" onfocus="(this.type='date')" onblur="(this.type='text')" required onChange={changeAniversario} title='Digite sua data de nascimento'></input>
+                        )}
+                        <div className={styles.borda_senha}>
+                            <input type='password' id='password' min="10" className={styles.senha} placeholder='senha' required onChange={changePassword} title='Digite sua senha'></input>
+                            <img src={olho} onClick={olhoAberto} className={`${styles.icones} ${styles.iconesOlho}`}/>
+                            <img src={olhoFechado} onClick={olhoFechadoFuncao} className={`${styles.icones} ${styles.iconesFechado}`}/>
+                        </div>
+                        <div className={styles.borda_senha}>
+                            <input type='password' id='password' className={styles.senha} min="10" placeholder='confirme a senha' required onChange={changeConfirPassword} title='Confirme sua senha'></input>
+                            <img src={olho} onClick={olhoAberto} className={`${styles.icones} ${styles.iconesOlho}`}/>
+                            <img src={olhoFechado} onClick={olhoFechadoFuncao} className={`${styles.icones} ${styles.iconesFechado}`}/>
+                        </div>
+
+                        
+                        {documento === 'CPF' && (
+                            <input type="text" id="CPF" placeholder="CPF" title='Digite seu cpf' required  onChange={changeDoc}/>
                         )}
                         {documento === 'CNPJ' && (
-                            <input type="text" id="CNPJ" placeholder="CNPJ" required  onChange={changeDoc}/>
+                            <input type="text" id="CNPJ" placeholder="CNPJ" required  title='Digite seu cnpj' onChange={changeDoc}/>
                         )}
                         <input type='file' id='image' onChange={changeImage} ></input>
                         <button type='submit' onClick={submit}>Próxima etapa</button>
