@@ -37,6 +37,10 @@
     cursor: pointer;
 }
 
+.link{
+    text-decoration: none;
+}
+
 .menu_navegacao_itens:hover{
     color: black;
 }
@@ -87,7 +91,7 @@
     font-size: 25px;
     color: white;
     margin-bottom: 10px;
-    margin-left: 10px;
+    margin-left: 35px;
     letter-spacing: 10px;
 }
 

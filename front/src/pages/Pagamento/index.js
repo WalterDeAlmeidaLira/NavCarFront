@@ -345,6 +345,7 @@ const Reserva = () => {
                   <input
                     onChange={changeCartao}
                     type="text"
+                    placeholder="xxxx.xxxx.xxxx.xxxx"
                     className="form-control"
                     id="numeroCartao"
                   />
@@ -353,13 +354,13 @@ const Reserva = () => {
                   <label htmlFor="validade" className="form-label">
                     Validade*
                   </label>
-                  <input type="text" className="form-control" id="validade" onChange={changeValidade} />
+                  <input type="text" placeholder="MM/AAAA" className="form-control" id="validade" onChange={changeValidade} />
                 </div>
                 <div className="col-md-3">
                   <label htmlFor="cvv" className="form-label">
                     CVV*
                   </label>
-                  <input type="text" className="form-control" id="cvv" onChange={changeCvv} />
+                  <input type="text" placeholder='123' className="form-control" id="cvv" onChange={changeCvv} />
                 </div>
               </div>
               <div className="row mb-3">
@@ -368,6 +369,7 @@ const Reserva = () => {
                     Nome do titular no cartão*
                   </label>
                   <input
+                    placeholder="Nome Completo"
                     onChange={changeNome}
                     type="text"
                     className="form-control"

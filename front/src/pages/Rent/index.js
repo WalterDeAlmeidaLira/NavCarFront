@@ -62,13 +62,13 @@ export default function Rent() {
         }
 
         dataResp = await buscaUsuario(token)
-        
-        
-
 
         let user = dataResp.user
         const dataHora = `${data}T${hora}:00`
         const dataCompleta = new Date(dataHora)
+        console.log('user ',user)
+        console.log('data completa',dataHora)
+        console.log('data completa',dataCompleta)
 
         let aluguel = {
             id_car: id,
@@ -78,17 +78,18 @@ export default function Rent() {
             local_retirada: selecionar ,
             local_devolucao: selecionar
         }
-        console.log(aluguel)
+        console.log("aluguel estopu aqui",aluguel)
         
-        let idAluguel
-        try{
-            const cadastra = await api.post('car/alugar',{aluguel})
-            idAluguel = cadastra.data.resultado
-            console.log(idAluguel)
-        }catch(error){
-            console.log(error)
-        }
-        navigate(`/car/rent/${idAluguel}`)
+        
+        
+        const cadastra = await api.post('car/alugar',{aluguel}).then(resp=>{
+            let idAluguel = resp.data.resultado
+            console.log("id aluguel",idAluguel)
+            console.log("id aluguel",data)
+            navigate(`/car/rent/${idAluguel}`)                    
+        })
+        
+
 
 
     }
@@ -129,9 +130,13 @@ export default function Rent() {
         }
 
         let hora = e.target.value
-        let ajsutTime = hora.split(':')
-        ajsutTime[0] = ajsutTime[0] - 3
-        hora = ajsutTime[0] + ":" + ajsutTime[1]
+        let ajustTime = hora.split(':')
+
+        let subtracaoHora = ajustTime[0] - 3
+        let horaComDoisDigitos = String(subtracaoHora).padStart(2, '0')
+        let minutoDoisDigitos = String(ajustTime[1]).padStart(2, '0')
+
+        hora = horaComDoisDigitos + ":" + minutoDoisDigitos
         console.log(hora)
         setHora(hora)
         
@@ -176,10 +181,7 @@ export default function Rent() {
                         </div>
                     </div>
                 </div>
-                <div className={styles.planos_rent}>
-                    <img alt="moeda" src={moeda} className={styles.moeda}></img>
-                    <p>Economize com nossos planos</p>
-                </div>
+                
             </form>
             <main className={styles.principal_rent}>
                 <div className={styles.container_veiculos} >

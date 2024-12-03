@@ -11,8 +11,8 @@ function Home() {
             <header className={styles.cabecalho_home}>
                 <nav className={styles.navegacao}>
                     <ul className={styles.menu_navegacao}>
-                        <Link to="/login"><li className={styles.menu_navegacao_itens}>Login</li></Link>
-                        <Link to="/register"><li className={styles.menu_navegacao_itens}>Cadastro</li></Link>
+                        <Link to="/login" className={styles.link}><li className={styles.menu_navegacao_itens}>Login</li></Link>
+                        <Link to="/register" className={styles.link}><li className={styles.menu_navegacao_itens}>Cadastro</li></Link>
                     </ul>
                 </nav>
                 <div className={styles.container_titulo}>
@@ -41,26 +41,11 @@ function Home() {
                     </div>
                     <div className={styles.container_inputs}>
                         <div className={styles.conteudo_input}>
-                            <label className={styles.label}>
-                                Alugue um carro
-                            </label>
-                            <div className={styles.div_input}>
-                                <svg _ngcontent-serverApp-c158="" className={styles.svg} viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path _ngcontent-serverApp-c158="" fill-rule="evenodd" clip-rule="evenodd" d="M0 5.79457C0 2.59944 2.69158 0 6 0C9.30839 0 11.9999 2.59944 12 5.79457C12 9.75982 6.63059 15.581 6.40198 15.8269C6.18764 16.0575 5.81275 16.0579 5.59802 15.8269C5.36941 15.581 0 9.75982 0 5.79457ZM2.98128 5.79457C2.98128 7.40213 4.33545 8.70998 6 8.70998C7.66452 8.70998 9.01869 7.40217 9.01869 5.7946C9.01869 4.18704 7.66452 2.87919 6 2.87919C4.33548 2.87919 2.98128 4.18701 2.98128 5.79457Z" fill="#555"></path>
-                                </svg>
-
-                                <input type="text" className={styles.input} placeholder="Onde voce quer alugar?" />
-                            </div>
+                            
+                            
                         </div>
                         <div className={styles.conteudo_input}>
-                            <label className={styles.label}>
-                                Data e Hora da Retirada
-                            </label>
-                            <div className={styles.div_input}>
-                                <input type="date" className={styles.input} />
-
-                                <input type="time" className={styles.input} />
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

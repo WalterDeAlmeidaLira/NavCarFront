@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
 import styles from './index_usuario.module.css'
 import { Link } from "react-router-dom";
+import Footer from "../layout/Footer";
+import { AuthContext} from '../../context/auth'
+import { useContext } from "react";
+
 
 const Usuario = () => {
+    const { logout } = useContext(AuthContext)
     const [pagamento, setPagamento] = useState([])
     const [user, setUser] = useState([])
     const [aluguel, setAluguel] = useState([])
@@ -84,6 +89,10 @@ const Usuario = () => {
 
     }, [user])
 
+    function sair(){
+        logout()
+    }
+
     async function criarDados(){
         console.log('aluguel', aluguel)
 
@@ -155,29 +164,7 @@ const Usuario = () => {
         
 
     
-        // if(exibirCarros.length < 1){
-        //     for(let i = 0; i <  carros.length ; i++){
-        //         if(aluguel[0][i].id_car ==  carros[i].id_car){
-        //             console.log('dentro do if', carros[i].imagem)
-        //             let inicio = aluguel[0][i].inicio_aluguel
-        //             let retirada =  aluguel[0][i].local_retirada
-        //             let data = aluguel[0][i].fim_aluguel
-        //             let diferenca = calculateDaysDifference(data)
-        //             let dataFim = formatDate(data)
-        //             let teste = {
-        //                 modelo:  carros[i].modelo,
-        //                 marca:  carros[i].marca,
-        //                 imagem: carros[i].imagem,
-        //                 inicio: inicio,
-        //                 fim: dataFim,
-        //                 local: retirada,
-        //                 devolucao: diferenca
-        //             }
-        //             setExibirCarros(dd => [...dd,teste])     
-        //         }
-        //     }
-            
-        // }
+        
 
 
         console.log('exibir carros',exibirCarros)
@@ -251,7 +238,7 @@ const Usuario = () => {
             <nav className="bg-success p-4">
                 <div className="container d-flex justify-content-between align-items-center">
                     <div className={styles.button}><Link to="/user/rent" className={styles.link}>Alugar Veículo</Link></div>
-                    <button className="btn btn-danger">Sair</button>
+                    <button className="btn btn-danger" onClick={sair}>Sair</button>
                 </div>
             </nav>
             {/* Main Content */}
@@ -344,9 +331,7 @@ const Usuario = () => {
             </div>
 
             {/* Footer */}
-            <footer className="bg-green-700 p-4 mt-5 text-center text-white">
-                <p>© 2023 Minha Conta. Todos os direitos reservados.</p>
-            </footer>
+            <Footer></Footer>
         </div>
     );
 };

@@ -13,9 +13,8 @@ export default function Footer(){
                 </div>
                 <div className={styles.coluna_footer}>
                     <h4 className={styles.titulo_footer}>Links úteis</h4>
-                    <p className={styles.link_footer}>Sobre Nós</p>
-                    <p className={styles.link_footer}>Serviços</p>
-                    <p className={styles.link_footer}>Contato</p>
+                    <a href='/Política de Privacidade da NavCar.pdf' className={styles.link} download="política.pdf"><p className={styles.link_footer}>Política de Privacidade</p></a>
+                    <a href='/Termos de Uso da NavCar.pdf' download="termo.pdf" className={styles.link}><p className={styles.link_footer}>Termo de uso</p></a>
                     <p className={styles.copy}>&copy; 2024 NavCar. Todos os direitos reservados</p>
                 </div>
                 <div>

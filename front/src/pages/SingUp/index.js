@@ -162,11 +162,11 @@ function SingUp() {
                 <div className={styles.form}>
                     <form className={styles.register}>
                         <h1>Cadastro</h1>
-                        <select className={styles.select} onChange={changeSelection}>
+                        {/* <select className={styles.select} onChange={changeSelection}>
                             <option value="CPF">Pessoa Júridica ou Pessoa Física</option>
                             <option value="CPF">Pessoa Física</option>
                             <option value="CNPJ">Pessoa Jurídica</option>
-                        </select>
+                        </select> */}
                         <input type='text' id='name' placeholder='Nome' required onChange={changeName} title='Digite seu nome'></input>
                         <input type='text' id='email' placeholder='Email' required onChange={changeEmail} title='Digite seu Email'></input>
                         {documento === 'CPF' && (

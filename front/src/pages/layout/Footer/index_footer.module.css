@@ -29,6 +29,12 @@ footer{
     color: #9289d1;
 }
 
+.link{
+    text-decoration: none;
+    color: aliceblue;
+    cursor: pointer;
+}
+
 
 .copy{
     margin-top: 20px;
