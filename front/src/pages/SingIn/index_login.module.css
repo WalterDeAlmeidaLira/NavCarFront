@@ -69,6 +69,37 @@
     cursor: pointer;
 }
 
+.icones{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.senha{
+    border: none !important;
+}
+
+.borda_senha{
+    display: flex;
+    border: 1px solid #777; 
+    padding: 5px;
+    border-radius: 10px; 
+    align-items: center;
+    justify-content: center;
+    height: 45px;  
+    margin-bottom: 10px;
+}
+
+.borda_senha > input{
+    width: 100%;
+    margin: 0px !important;
+}
+
+.iconesFechado{
+    display: none;
+}
+
 .button:hover{
     background-color: #20761E;
     color: white;

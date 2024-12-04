@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import styles from './index_login.module.css'
 import {  useContext, useState } from 'react'
 import { AuthContext} from '../../context/auth'
+import olho from '../../assets/olho.png'
+import olhoFechado from '../../assets/olho_fechado.png'
 
 function SingIn() {
 
@@ -21,13 +23,34 @@ function SingIn() {
 
     async function enviar(e){
         e.preventDefault()
+        const formData = {
+            email: email,
+            password: password
+        }
+
         const user = {
             email: email,
             password: password
         }
         const rota = 'user/login'
-        const data = await login(user,rota)
+        const data = await login(user,rota,formData)
         setMensagem(data)
+    }
+
+    function olhoAberto(e){
+        
+        e.target.style.display = "none"    
+        e.target.nextElementSibling.style.display = 'inline-block'
+        e.target.previousElementSibling.type = 'text'
+            
+        
+    }
+
+    function olhoFechadoFuncao(e){
+        e.target.style.display = "none"    
+        e.target.previousElementSibling.style.display = 'inline-block'
+        e.target.previousElementSibling.previousElementSibling.type = 'password'
+        
     }
 
     function limparMsg(e){
@@ -43,12 +66,11 @@ function SingIn() {
                 <h1 className={styles.title}>Iniciar sessão</h1>
                 <form className={styles.formulario}>
                     <input type='text' placeholder='Email' title='Digite seu email' onChange={changeEmail} className={styles.input}></input>
-                    <input type='password' placeholder='Senha' title='Digite sua senha' onChange={changePassword} className={styles.input}></input>
-                    <label className={styles.checkbox_title}>
-                        <input type='checkbox' className={styles.checkbox}></input>
-                        lembrar-me
-                    </label>
-                    <Link to="/nao existe" className={styles.link}>Esqueci minha senha</Link>
+                    <div className={styles.borda_senha}>
+                        <input type='password' id='password' min="10" className={styles.senha} placeholder='senha' required onChange={changePassword} title='Digite sua senha'></input>
+                        <img src={olho} onClick={olhoAberto} className={`${styles.icones} ${styles.iconesOlho}`}/>
+                        <img src={olhoFechado} onClick={olhoFechadoFuncao} className={`${styles.icones} ${styles.iconesFechado}`}/>
+                    </div>
                     <button type='submit' className={styles.button} onClick={enviar}>Entrar</button>
                 </form>
                 <Link to="/register" className={styles.link}>Não tem cadastro?</Link>

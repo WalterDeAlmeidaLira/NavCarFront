@@ -54,6 +54,15 @@ router.post('/register', upload.single('image'),async (req, resp) => {
         user_admin: req.body.admin
     }
     console.log('teste', user)
+    
+    if(/[0-9]/.test(user.user_name)) {
+        return resp.status(401).json({ mensagem: "O nome não pode ter números" });
+    }
+    
+    if(/[!@#$%^&*(),.?":{}|<>]/.test(user.user_name)) {
+        return resp.status(401).json({ mensagem: "O nome não pode ter caractere especial (!@#$%^&*(),.?\":{}|<>)" });
+    }
+    
     if(!user.user_name || !user.user_email || !user.user_password || !user.user_password_confirm || !user.user_doc){
         return resp.status(401).json({mensagem: "faltou preencher algum campo obrigatório!"})
     }
@@ -171,19 +180,22 @@ router.post('/login', async (req,resp)=>{
         password: req.body.password,
     }
     
+    console.log(userBody)
     const user = await buscaUsuario(userBody.email)
     
     if(user.length == 0){
         return resp.status(401).json({
             mensagem: "Email ou senha incorretos!"
         })
-    }
+    } 
 
     let verify = bcrypt.compareSync(userBody.password, user[0].user_password)
-        
+    console.log('teste',verify)
     if(!verify) return resp.status(401).json({
         mensagem: "Email ou senha incorretos!"
     })
+
+    console.log(user[0])
 
     const token = jwt.sign({
         id:user[0].user_id,
@@ -191,7 +203,13 @@ router.post('/login', async (req,resp)=>{
         email: user[0].user_email
     },'token')
 
-    return resp.status(200).json({token: token})
+    console.log(token)
+
+    if (!token) {
+        return resp.status(400).json({ message: "Erro ao gerar token" });
+    }
+
+    return resp.status(200).json({ token })
 
 })
 
