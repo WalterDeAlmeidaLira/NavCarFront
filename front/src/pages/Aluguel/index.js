@@ -266,7 +266,7 @@ function Aluguel() {
 
   return (
     <div>
-      <div className="container p-3">
+      <div className="container p-3" style={{ backgroundColor: "#D6D6D6" }}>
         <div className="row">
           <div className="col-md-8">
             <div className="card mb-3">

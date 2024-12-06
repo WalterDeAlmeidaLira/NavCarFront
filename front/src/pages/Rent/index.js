@@ -151,8 +151,7 @@ export default function Rent() {
             <div className={styles.banner_rent}>
                 <div></div>
                 <div className={styles.frase_efeito}>
-                    <p>frase de efeito</p>
-                    <p>"Fazer"</p>
+                    <p>Sua jornada começa aqui!</p>                    
                 </div>
             </div>
             <form className={styles.form_rent}>

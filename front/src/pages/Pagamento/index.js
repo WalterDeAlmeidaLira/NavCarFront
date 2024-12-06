@@ -143,14 +143,15 @@ const Reserva = () => {
 
     const input = e.target.value;
     const formatado = formatarCartao(input);
-    
 
-    // Valida somente se o número tiver pelo menos 13 dígitos (mínimo para cartões válidos)
+    // Valida somente se o número tiver pelo menos 16 dígitos (mínimo para cartões válidos)
     if (formatado.replace(/\D/g, "").length >= 16) {
       setNumeroCartao(formatado)
     }else{
       setNumeroCartao(null)
     }
+
+
   }
 
   function validarData(data) {
@@ -270,7 +271,7 @@ const Reserva = () => {
   }
 
   return (
-    <div className="container p-3">
+    <div className="container p-3" style={{ backgroundColor: "#D6D6D6" }}>
       <div className="row">
         <div className="col-md-8">
           <div className="mb-4">
@@ -282,15 +283,15 @@ const Reserva = () => {
               As informações coletadas no cadastro do cliente serão utilizadas para identificação das reservas e execução de contrato entre o titular e a Localiza. Para mais informações sobre o tratamento de dados pessoais, acesse nosso Portal de Privacidade.
             </p>
           </div>
-          <div className="bg-light p-4 rounded">
-            <form>
+          <div className="bg-light p-4 rounded" style={{ backgroundColor: "#D6D6D6" }}>
+            <form >
               <div className="row mb-3">
                 <div className="col-md-6">
                   <label htmlFor="nomeCompleto" className="form-label">
                     Nome Completo*
                   </label>
                   {exibirUser[2] && (
-                    <input type="text" className="form-control" id="nomeCompleto" value={exibirUser[2].name}
+                    <input type="text"  className="form-control" id="nomeCompleto" value={exibirUser[2].name}
                       disabled
                     />
 
@@ -304,6 +305,7 @@ const Reserva = () => {
                   </label>
                   {exibirUser[2] && (
                     <input
+                    
                       type="email"
                       className="form-control"
                       id="email"
@@ -320,6 +322,7 @@ const Reserva = () => {
                   </label>
                   {exibirUser[2] && (
                     <input
+                      
                       type="text"
                       className="form-control"
                       id="documento"
@@ -343,6 +346,7 @@ const Reserva = () => {
                     Número do Cartão*
                   </label>
                   <input
+                    style={{ border: "1px solid #333" }}
                     onChange={changeCartao}
                     type="text"
                     placeholder="xxxx.xxxx.xxxx.xxxx"
@@ -354,13 +358,13 @@ const Reserva = () => {
                   <label htmlFor="validade" className="form-label">
                     Validade*
                   </label>
-                  <input type="text" placeholder="MM/AAAA" className="form-control" id="validade" onChange={changeValidade} />
+                  <input style={{ border: "1px solid #333" }} type="text" placeholder="MM/AAAA" className="form-control" id="validade" onChange={changeValidade} />
                 </div>
                 <div className="col-md-3">
                   <label htmlFor="cvv" className="form-label">
                     CVV*
                   </label>
-                  <input type="text" placeholder='123' className="form-control" id="cvv" onChange={changeCvv} />
+                  <input type="text" style={{ border: "1px solid #333" }} placeholder='123' className="form-control" id="cvv" onChange={changeCvv} />
                 </div>
               </div>
               <div className="row mb-3">
@@ -369,6 +373,7 @@ const Reserva = () => {
                     Nome do titular no cartão*
                   </label>
                   <input
+                    style={{ border: "1px solid #333" }}
                     placeholder="Nome Completo"
                     onChange={changeNome}
                     type="text"
@@ -383,9 +388,9 @@ const Reserva = () => {
           </div>
         </div>
         <div className="col-md-4 p-3">
-          <div className="card">
+          <div className="card" style={{ border: "1px solid #333" }}>
             <div className="card-header bg-warning">Resumo da Reserva</div>
-            <div className="card-body">
+            <div className="card-body" style={{ backgroundColor: "#D6D6D6" }}>
               <div className="mb-3">
                 {exibir.length > 0 ? (
                   exibir.map((dado, index) => (
